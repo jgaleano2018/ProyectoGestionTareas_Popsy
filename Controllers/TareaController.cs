@@ -29,6 +29,12 @@ namespace ProyectoGestionTareas.Controllers
                     return BadRequest("You must enter all required fields");
                 }
 
+
+                if (!(tarea.FechaCreacion <= tarea.FechaVencimiento)) {
+
+                    return BadRequest("The Creation Date is minor than Expiration Date");
+                }
+
                 var result = await _tareaService.AddTareaAsync(tarea);
 
                 return Ok(result);
